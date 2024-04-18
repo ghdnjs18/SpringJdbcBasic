@@ -1,10 +1,12 @@
 package study.jdbc.repository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import study.jdbc.domain.Member;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Slf4j
 class MemberRepositoryVOTest {
 
     MemberRepositoryVO repository = new MemberRepositoryVO();
@@ -12,8 +14,12 @@ class MemberRepositoryVOTest {
     @Test
     public void crud() throws Exception {
         // save
-        Member member = new Member("memberVO", 10000);
+        Member member = new Member("memberV1", 10000);
         repository.save(member);
 
+        // findById
+        Member findMember = repository.findById(member.getMemberId());
+        log.info("findmember = {}", findMember);
+        assertEquals(findMember, member);
     }
 }
