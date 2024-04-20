@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.net.ConnectException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 @Slf4j
@@ -14,6 +15,17 @@ public class UncheckedAppTest {
     void checked() {
         Controller controller = new Controller();
         Assertions.assertThrows(Exception.class, () -> controller.request());
+    }
+
+    @Test
+    void printEx() {
+        Controller controller = new Controller();
+        try {
+            controller.request();
+        } catch (Exception e) {
+            // e.printStackTrace();
+            log.info("ex", e);
+        }
     }
 
     static class Controller {
